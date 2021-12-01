@@ -1,0 +1,39 @@
+main > div {
+    margin: 0 auto;
+    height: 10rem;
+    width: 20rem;
+}
+
+main > div > div > a > img.logo {
+    height: 8rem;
+    margin-left: -13px;
+    margin-right: auto;
+}
+
+html {
+    font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+}
+
+main > form > div > div > input {
+    margin: 0 auto;
+    height: 4rem;
+    width: 20rem;
+    margin-left: -3rem;
+    padding: 0 11px;
+    border: 1px darkgrey solid;
+    border-radius: 2px;
+}
+
+main > form > div > input.login {
+    margin: 0 auto;
+    height: 4rem;
+    width: 20rem;
+    margin-left: -36px;
+    font-size: 1rem;
+    background-color: lightskyblue;
+    border-radius: 7px;
+    color: dimgray;
+    font-weight: 400;
+    border-style: unset;
+}

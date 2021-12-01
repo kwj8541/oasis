@@ -1,0 +1,66 @@
+main > h1 {
+    height: 2rem;
+    width: 14rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+main > form {
+    width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main > form > section > h2 {
+    height: 2rem;
+    width: 12rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+}
+
+main > form > section > table > tbody > tr > td > input {
+    border-width: thin;
+    height: 45px;
+    width: 20rem;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: snow;
+}
+
+main > form > section > table > tbody > tr > th > label {
+    color: grey;
+}
+
+main > form > div > input {
+    height: 2rem;
+    width: 5rem;
+    background-color: lightgrey;
+    border-radius: 5px;
+    border-style: hidden;
+    cursor: pointer;
+}
+
+main > form > div {
+    margin-left: auto;
+    margin-right: auto;
+    height: 2rem;
+    width: 18rem;
+    margin-top: 1rem;
+}
+
+main > form > section > table > tbody > tr > td > span.input-message {
+    display: none;
+}
+
+main > form > section > table > tbody > tr > td > span.input-message.good {
+    color: #77a518;
+    display: inline;
+}
+
+main > form > section > table > tbody > tr > td > span.input-message.warning {
+    color: #c91e1e;
+    display: inline;
+}

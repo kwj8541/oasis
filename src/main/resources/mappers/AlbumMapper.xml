@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.junyweb.oasis.mappers.IAlbumMapper">
+
+    <select id="selectAlbumCount" parameterType="com.junyweb.oasis.entities.AlbumListEntity" resultType="_int">
+        SELECT COUNT(0)
+        FROM `oasis`.`album_list`;
+    </select>
+
+
+    <select id="selectAlbumsByList" parameterType="com.junyweb.oasis.vos.album.AlbumListVo"
+            resultType="com.junyweb.oasis.entities.AlbumListEntity">
+        SELECT `index`  AS `index`,
+               `title`  AS `title`,
+               `artist` AS `artist`
+        FROM `oasis`.`album_list`
+        ORDER BY `album_list`.`index` DESC
+        LIMIT ${queryLimit} OFFSET ${queryOffset};
+    </select>
+
+    <select id="selectAlbum" parameterType="com.junyweb.oasis.vos.album.AlbumVo" resultType="com.junyweb.oasis.entities.AlbumEntity">
+        SELECT `index`  AS `index`,
+               `title`  AS `title`,
+               `artist` AS `artist`
+        FROM `oasis`.`album_list`
+        WHERE `title` = #{title}
+        LIMIT 1;
+    </select>
+
+    <select id="selectImage" parameterType="com.junyweb.oasis.entities.ImageEntity" resultType="com.junyweb.oasis.entities.ImageEntity">
+        SELECT `index`      AS `index`,
+               `created_at` AS `createdAt`,
+               `mime`       AS `mime`,
+               `file`       AS `imageFile`,
+               `title` AS `title`
+        FROM `oasis`.`images`
+        WHERE `title` = #{title};
+    </select>
+
+    <select id="selectMusicByTitle"
+            parameterType="com.junyweb.oasis.vos.album.MusicVo" resultType="com.junyweb.oasis.entities.MusicEntity">
+        SELECT `index`      AS `index`,
+               `title_name` AS `titleName`,
+               `music_name` AS `musicName`,
+               `music` AS music
+        FROM `oasis`.`music`
+        WHERE title_name = #{titleName}
+        LIMIT 5;
+    </select>
+
+    <select id="selectMusic"
+            parameterType="com.junyweb.oasis.vos.album.MusicVo" resultType="com.junyweb.oasis.entities.MusicEntity">
+        select `title_name` AS `titleName`,
+               `music_name` AS `musicName`,
+               `music`      AS `music`,
+               `view`       AS `view`
+        FROM `oasis`.`music`
+        WHERE title_name = #{titleName}
+          AND music_name = #{musicName}
+        LIMIT 1;
+    </select>
+
+    <update id="updateMusic" parameterType="com.junyweb.oasis.entities.MusicEntity">
+        UPDATE `oasis`.`music`
+        SET `view` = #{view}
+        WHERE `music_name` = #{musicName}
+        LIMIT 1;
+    </update>
+
+    <insert id="insertComment" parameterType="com.junyweb.oasis.entities.CommentEntity">
+        INSERT INTO `oasis`.`comments` (`user_email`,`user_nickname`, `album_page`, `content`)
+        VALUES (#{userEmail}, #{userNickname}, #{albumPage}, #{content})
+    </insert>
+
+    <select id="selectComments" parameterType="com.junyweb.oasis.entities.CommentEntity" resultType="com.junyweb.oasis.entities.CommentEntity">
+        SELECT `index`         AS `index`,
+               `user_email`    AS `userEmail`,
+               `user_nickname` AS `userNickname`,
+               `created_at`    AS `createdAt`,
+               `content`       AS `content`,
+               `deleted_flag`  AS `isDeleted`
+        FROM `oasis`.`comments` AS `comment`
+        WHERE album_page = #{albumPage}
+        ORDER BY `comment`.`index` DESC;
+    </select>
+
+    <select id="selectComment" parameterType="com.junyweb.oasis.entities.CommentEntity" resultType="com.junyweb.oasis.entities.CommentEntity">
+        SELECT `index`         AS `index`,
+               `user_email`    AS `userEmail`,
+               `user_nickname` AS `userNickname`,
+               `created_at`    AS `createdAt`,
+               `content`       AS `content`,
+               `deleted_flag`  AS `isDeleted`,
+               `album_page` AS `albumPage`
+        FROM `oasis`.`comments`
+        WHERE `index` = #{index}
+        LIMIT 1;
+    </select>
+
+    <update id="updateComment" parameterType="com.junyweb.oasis.entities.CommentEntity">
+        UPDATE `oasis`.`comments`
+        SET `user_email`    = #{userEmail},
+            `user_nickname` = #{userNickname},
+            `created_at`    = #{createdAt},
+            `album_page`    = #{albumPage},
+            `content`       = #{content},
+            `deleted_flag`  = #{isDeleted}
+        WHERE `index` = #{index}
+        LIMIT 1;
+    </update>
+
+    <select id="selectMusicTop5" parameterType="com.junyweb.oasis.vos.album.MusicVo" resultType="com.junyweb.oasis.entities.MusicEntity">
+        SELECT `index`      AS `index`,
+               `title_name` AS `titleName`,
+               `music`      AS `music`,
+               `music_name` AS musicName,
+               `view`       AS `view`
+        FROM `oasis`.`music`
+        ORDER BY `music`.`view` DESC
+        LIMIT 5;
+    </select>
+
+</mapper>

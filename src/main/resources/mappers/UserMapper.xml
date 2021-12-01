@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.junyweb.oasis.mappers.IUserMapper">
+    <insert id="insertUser" parameterType="com.junyweb.oasis.vos.user.RegisterVo">
+        INSERT INTO `oasis`.`users` (`email`, `password`, `nickname`, `name`, `address_postal`, `address_primary`, `address_secondary`)
+        VALUES (#{email}, #{hashedPassword}, #{nickname}, #{name}, #{addressPostal}, #{addressPrimary}, #{addressSecondary})
+    </insert>
+
+    <insert id="insertVerificationCode" parameterType="com.junyweb.oasis.vos.user.RegisterVo">
+        INSERT INTO `oasis`.`verification_codes` (`expires_at`, `user_email`,`code`)
+        VALUES (DATE_ADD(NOW(), INTERVAL 1 HOUR ), #{email}, #{verificationCode})
+    </insert>
+
+    <select id="selectEmailCount" parameterType="string" resultType="_int">
+        SELECT COUNT(0)
+        FROM `oasis`.`users`
+        WHERE `email` = #{email};
+    </select>
+
+    <select id="selectNicknameCount" parameterType="string" resultType="_int">
+        SELECT COUNT(0)
+        FROM `oasis`.`users`
+        WHERE `nickname` = #{nickname};
+    </select>
+
+    <select id="selectUserByEmailVerification" parameterType="com.junyweb.oasis.entities.VerificationCodeEntity" resultType="com.junyweb.oasis.entities.UserEntity"><![CDATA[
+        SELECT `user`.`email`               AS `email`,
+               `user`.`created_at`          AS `createdAt`,
+               `user`.`updated_at`          AS `updatedAt`,
+               `user`.`password`            AS `password`,
+               `user`.`nickname`            AS `nickname`,
+               `user`.`name`                AS `name`,
+               `user`.`address_postal`      AS `addressPostal`,
+               `user`.`address_primary`     AS `addressPrimary`,
+               `user`.`address_secondary`   AS `addressSecondary`,
+               `user`.`admin_flag`          AS `isAdmin`,
+               `user`.`email_verified_flag` AS `isEmailverified`,
+               `user`.`suspended_flag`      AS isSuspended,
+               `user`.`deleted_flag`        AS isDeleted
+        FROM `oasis`.`verification_codes` AS `code`
+                 LEFT JOIN `oasis`.`users` AS `user` ON `code`.`user_email` = `user`.`email`
+        WHERE `code`.`created_at` <= NOW()
+          AND `code`.`expires_at` >= NOW()
+          AND `code`.`expired_flag` = FALSE
+          AND `code`.`code` = #{code}
+        LIMIT 1;
+
+        ]]>
+    </select>
+
+    <update id="updateEmailVerificationCodeExpired" parameterType="com.junyweb.oasis.entities.VerificationCodeEntity">
+        UPDATE `oasis`.`verification_codes`
+        SET `expired_flag` = true
+        WHERE `code` = #{code}
+        LIMIT 1;
+    </update>
+
+    <update id="updateUser" parameterType="com.junyweb.oasis.entities.UserEntity">
+        UPDATE `oasis`.`users`
+        SET `updated_at`          = NOW(),
+            `password`            = #{password},
+            `nickname`            = #{nickname},
+            `name`                = #{name},
+            `address_postal`      = #{addressPostal},
+            `address_primary`     = #{addressPrimary},
+            `address_secondary`   = #{addressSecondary},
+            `admin_flag`          = #{isAdmin},
+            `email_verified_flag` = #{isEmailVerified},
+            `suspended_flag`      = #{isSuspended},
+            `deleted_flag`        = #{isDeleted}
+        WHERE `email` = #{email}
+        LIMIT 1;
+    </update>
+
+    <select id="selectUserByLogin" parameterType="com.junyweb.oasis.vos.user.LoginVo" resultType="com.junyweb.oasis.entities.UserEntity">
+        SELECT `email`               AS `email`,
+               `created_at`          AS `createdAt`,
+               `updated_at`          AS `updatedAt`,
+               `password`            AS `password`,
+               `nickname`            AS `nickname`,
+               `name`                AS `name`,
+               `address_postal`      AS `addressPostal`,
+               `address_primary`     AS `addressPrimary`,
+               `address_secondary`   AS `addressSecondary`,
+               `admin_flag`          AS `isAdmin`,
+               `email_verified_flag` AS `isEmailverified`,
+               `suspended_flag`      AS isSuspended,
+               `deleted_flag`        AS isDeleted
+        FROM `oasis`.`users`
+        WHERE `email` = #{email}
+          AND `password` = #{hashedPassword}
+        LIMIT 1;
+    </select>
+</mapper>
