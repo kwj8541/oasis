@@ -6,6 +6,7 @@ import com.junyweb.oasis.enums.album.CommentResult;
 import com.junyweb.oasis.enums.album.MusicResult;
 import com.junyweb.oasis.mappers.IAlbumMapper;
 import com.junyweb.oasis.vos.album.*;
+import com.junyweb.oasis.vos.ticket.MusicTicketVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
@@ -65,7 +66,7 @@ public class AlbumService {
         imageVo.setImageFile(imageEntity.getImageFile());
     }
 
-    public void music(MusicVo musicVo) { // 음악 메서드
+    public void music(UserEntity userEntity, MusicVo musicVo) { // 음악 메서드
         MusicEntity musicEntity = this.albumMapper.selectMusic(musicVo);
         if (musicEntity == null) {
             musicVo.setMusicResult(MusicResult.FAILURE);
@@ -75,6 +76,10 @@ public class AlbumService {
         this.albumMapper.updateMusic(musicEntity);
         musicVo.setView(musicEntity.getView());
         musicVo.setMusic(musicEntity.getMusic());
+        if (!userEntity.isHaveTicket()) {
+            musicVo.setMusicResult(MusicResult.NOT_ALLOWED);
+            return;
+        }
         musicVo.setMusicResult(MusicResult.SUCCESS);
     }
 
@@ -114,6 +119,10 @@ public class AlbumService {
         MusicEntity[] musicEntity = this.albumMapper.selectMusicTop5(musicVo); // musicEntity 에 데이터베이스에서 가져온 음악들 담기
         musicVo.setMusicList(musicEntity);
         musicVo.setMusicLimit(Config.MUSIC_COUNT_TOP_5); // 뿌려줄 음악 갯수 5개로 제한
+    }
+
+    public void musicTicket(UserEntity userEntity, MusicTicketVo musicTicketVo) { // 음악 이용권 메서드
+
     }
 }
 

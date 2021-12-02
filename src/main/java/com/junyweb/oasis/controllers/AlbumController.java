@@ -96,14 +96,19 @@ public class AlbumController {
 
     @RequestMapping(value = "/albums/music/{title}/{musicName}", method = RequestMethod.GET)
     public ResponseEntity<byte[]> musicGet(HttpServletResponse response,
+                                           @SessionAttribute(name = "userEntity") UserEntity userEntity,
                                            @PathVariable(name = "title") String title,
                                            @PathVariable(name = "musicName") String musicName) throws IOException {
         MusicVo musicVo = new MusicVo();
         musicVo.setTitleName(title);
         musicVo.setMusicName(musicName);
-        this.albumService.music(musicVo);
+        this.albumService.music(userEntity,musicVo);
         if (musicVo.getMusicResult() == MusicResult.FAILURE) {
             response.sendError(404);
+            return null;
+        }
+        if (musicVo.getMusicResult() == MusicResult.NOT_ALLOWED) {
+            response.sendRedirect("/oasis/verifyTicket");
             return null;
         }
         MultiValueMap<String, String> headers = new HttpHeaders();
@@ -112,6 +117,11 @@ public class AlbumController {
                 musicVo.getMusic(),
                 headers,
                 HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/verifyTicket")
+    public String ticketVerify() {
+        return "/ticket/verifyTicket";
     }
 
     @RequestMapping(value = "/delete/{index}/{title}/{albumPage}", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)

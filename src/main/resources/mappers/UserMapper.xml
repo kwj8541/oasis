@@ -87,7 +87,8 @@
                `admin_flag`          AS `isAdmin`,
                `email_verified_flag` AS `isEmailverified`,
                `suspended_flag`      AS isSuspended,
-               `deleted_flag`        AS isDeleted
+               `deleted_flag`        AS isDeleted,
+               `have_ticket`         AS haveTicket
         FROM `oasis`.`users`
         WHERE `email` = #{email}
           AND `password` = #{hashedPassword}

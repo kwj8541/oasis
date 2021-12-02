@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="com.junyweb.oasis.enums.album.CommentResult" %>
+<%@ page import="com.junyweb.oasis.enums.album.MusicResult" %>
 <%--@elvariable id="commentResult" type="com.junyweb.oasis.enums.album.CommentResult"--%>
+<%--@elvariable id="musicResult" type="com.junyweb.oasis.enums.album.MusicResult"--%>
 <%--@elvariable id="userEntity" type="com.junyweb.oasis.entities.UserEntity"--%>
 <%--@elvariable id="music" type="com.junyweb.oasis.entities.MusicEntity"--%>
 <!DOCTYPE html>
@@ -31,6 +33,17 @@
         </c:choose>
         <% out.close(); %>
     </c:if>
+
+    <c:if test="${musicResult != null}">
+        <c:choose>
+            <c:when test="${musicResult == MusicResult.NOT_ALLOWED}">
+                <script>
+                    alert('이용권 구매후 이용해주시기 바랍니다.');
+                    window.history.back();
+                </script>
+            </c:when>
+        </c:choose>
+    </c:if>
 </head>
 
 <body>
@@ -58,7 +71,7 @@
                 <td style="margin-top: 0.5rem">
                         ${music.musicName}
                     <a class="hover" style="text-decoration: none; font-weight: bold; border-radius: 0.5rem; padding-right: 0.25rem; background-color: paleturquoise; margin-left: 0.5rem; color: orangered;"
-                       onclick="window.open('/oasis/albums/music/${music.titleName}/${music.musicName}','','width=400,height=300,left=750rem,top=300rem')"
+                       onclick="window.open('/oasis/albums/music/${music.titleName}/${music.musicName}','','width=600,height=500,left=750rem,top=300rem')"
                        target="_blank"> > </a>
                 </td>
             </c:forEach>

@@ -32,6 +32,13 @@
             <span style="display: flex; flex-direction: column; align-items: center;" class="artist"><a>artist : ${album.artist}</a></span>
         </div>
     </c:forEach>
+
+    <c:if test="${userEntity == null}">
+        <script>
+            alert('로그인후 이용해주시기 바랍니다.');
+            window.history.back();
+        </script>
+    </c:if>
 </div>
 </form>
 

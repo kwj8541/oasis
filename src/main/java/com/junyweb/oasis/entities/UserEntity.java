@@ -16,6 +16,15 @@ public class UserEntity {
     protected boolean isEmailVerified;
     protected boolean isSuspended;
     protected boolean isDeleted;
+    private boolean haveTicket;
+
+    public boolean isHaveTicket() {
+        return haveTicket;
+    }
+
+    public void setHaveTicket(boolean haveTicket) {
+        this.haveTicket = haveTicket;
+    }
 
     public String getEmail() {
         return email;
