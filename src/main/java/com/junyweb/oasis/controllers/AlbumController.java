@@ -83,7 +83,7 @@ public class AlbumController {
         }
     }
 
-    @RequestMapping(value = "/album-image/{title}", method = RequestMethod.GET)
+    @RequestMapping(value = "/album-image/{title}", method = RequestMethod.GET) // 앨범 이미지 뿌려주는 매핑
     public ResponseEntity<byte[]> imageGet(@PathVariable("title") String title, Model model) {
         AlbumImageVo albumImageVo = new AlbumImageVo();
         albumImageVo.setTitle(title);

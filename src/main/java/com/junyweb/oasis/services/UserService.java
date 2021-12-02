@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class UserService {
 
-    public static class RegExp {
+    public static class RegExp {    // 정규식 설정
         public static final String EMAIL = "^(?=.{8,50}$)([0-9a-z_]{4,})@([0-9a-z][0-9a-z\\-]*[0-9a-z]\\.)?([0-9a-z][0-9a-z\\-]*[0-9a-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$";
         public static final String PASSWORD = "^([0-9a-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:'\",<.>/?]{8,50})$";
         public static final String NICKNAME = "^([0-9a-zA-Z가-힣]{1,10})$";
@@ -121,7 +121,7 @@ public class UserService {
         registerVo.setRegisterResult(RegisterResult.SUCCESS);
     }
 
-    public void checkEmail(EmailCheckVo emailCheckVo) {
+    public void checkEmail(EmailCheckVo emailCheckVo) { // 이메일 정규식 확인
         if (!UserService.checkEmail(emailCheckVo.getEmail())) {
             emailCheckVo.setEmailCheckResult(EmailCheckResult.NORMALIZATION_FAILURE);
             return;
@@ -131,7 +131,7 @@ public class UserService {
                 EmailCheckResult.NON_EXISTING);
     }
 
-    public void checkNickname(NicknameCheckVo nicknameCheckVo) {
+    public void checkNickname(NicknameCheckVo nicknameCheckVo) { // 닉네임 정규식 확인
         if (!UserService.checkNickname(nicknameCheckVo.getNickname())) {
             nicknameCheckVo.setNicknameCheckResult(NicknameCheckResult.NORMALIZATION_FAILURE);
             return;

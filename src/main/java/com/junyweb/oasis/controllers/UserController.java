@@ -86,7 +86,7 @@ public class UserController {
     @RequestMapping(value = "/check-email",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public String checkEmailPost(@RequestBody EmailCheckVo emailCheckVo) {
+    public String checkEmailPost(@RequestBody EmailCheckVo emailCheckVo) {  // 회원가입시 ajax를 이용한 이메일 체크
         this.userService.checkEmail(emailCheckVo);
         JSONObject responseJson = new JSONObject(); // Json 객체 만들기
         responseJson.put("result", emailCheckVo.getEmailCheckResult().name().toLowerCase()); // Json 객체에 이메일체크 결과 담기 -> register.js
