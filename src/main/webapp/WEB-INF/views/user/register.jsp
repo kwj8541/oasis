@@ -53,11 +53,10 @@
 <div rel="address-container"
      style="top: 50%; left: 50%; width: 30rem; height: 30rem;
      display: none; position: fixed; transform: translate(-50%, -50%); z-index: 2;"></div>
-<main style="align-items: center; display: flex; flex-direction: column; justify-content: center;">
-    <h1>회원가입</h1>
+<main>
     <form method="post" rel="register-form">
         <section>
-            <h2>회원정보</h2>
+            <h2>정보 입력</h2>
             <table style="width: 50rem">
                 <tbody>
                 <tr>

@@ -42,6 +42,9 @@
                     window.history.back();
                 </script>
             </c:when>
+            <c:when test="${musicResult == MusicResult.SUCCESS}">
+                <c:set var="ticket" value="무료 음악듣기 이용중"/>
+            </c:when>
         </c:choose>
     </c:if>
 </head>

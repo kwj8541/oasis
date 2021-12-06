@@ -1,10 +1,20 @@
-main > h1 {
-    height: 2rem;
-    width: 14rem;
-    margin-left: auto;
-    margin-right: auto;
+body {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+body > main {
+    width: 42%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 23px;
+    border-style: groove;
+    background: linear-gradient(
+            115deg, azure, cornsilk);
+    padding-bottom: 5rem;
     margin-top: 3rem;
-    margin-bottom: 5rem;
 }
 
 main > form {
@@ -14,11 +24,12 @@ main > form {
 }
 
 main > form > section > h2 {
-    height: 2rem;
-    width: 12rem;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 2rem;
+    margin-top: 3rem;
+    color: gray;
 }
 
 main > form > section > table > tbody > tr > td > input {
@@ -37,18 +48,19 @@ main > form > section > table > tbody > tr > th > label {
 main > form > div > input {
     height: 2rem;
     width: 5rem;
-    background-color: lightgrey;
-    border-radius: 5px;
+    background-color: antiquewhite;
+    border-radius: 10px;
     border-style: hidden;
     cursor: pointer;
+    margin-right: 1rem;
+
 }
 
 main > form > div {
-    margin-left: auto;
-    margin-right: auto;
-    height: 2rem;
-    width: 18rem;
-    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
 }
 
 main > form > section > table > tbody > tr > td > span.input-message {

@@ -5,6 +5,7 @@ import com.junyweb.oasis.enums.album.CommentResult;
 import com.junyweb.oasis.enums.album.MusicResult;
 import com.junyweb.oasis.services.AlbumService;
 import com.junyweb.oasis.vos.album.*;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -119,11 +120,6 @@ public class AlbumController {
                 HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/verifyTicket")
-    public String ticketVerify() {
-        return "/ticket/verifyTicket";
-    }
-
     @RequestMapping(value = "/delete/{index}/{title}/{albumPage}", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String deleteCommentGet(@PathVariable(name = "index") int index, // 댓글 index
                                    @PathVariable(name = "title") String title, // 댓글의 현 위치의 title
@@ -138,5 +134,7 @@ public class AlbumController {
         request.setAttribute("commentDeleteVo", commentDeleteVo);
         return "/album/commentDelete";
     }
+
+    // TODO : 이용권 구매 만들기
 
 }

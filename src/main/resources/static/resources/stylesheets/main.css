@@ -6,6 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
     justify-content: flex-start;
     margin: 0;
     position: absolute;
@@ -17,8 +18,10 @@ html {
 }
 
 .main .header {
-    height: 300px;
+    height: 8rem;
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .main .body {
@@ -27,9 +30,7 @@ html {
 }
 
 .main .header .logo {
-    height: 10rem;
-    margin-left: auto;
-    margin-right: auto;
+    height: 100%;
 }
 
 ul {
@@ -45,7 +46,6 @@ body > .main .body .TOP > span > a:hover {
 body > header{
     margin-bottom: 2rem;
     align-items: center;
-    background-color: lightgray;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -62,6 +62,46 @@ body > header > ul {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+body > div.main > div#head > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-style: inset;
+}
+
+body > div.main > div#head > ul > li {
+    list-style: none;
+    border-style: none;
+    background: linear-gradient(
+            45deg, crimson, aquamarine);
+    border-radius: 9px;
+    padding: 4px;
+    font-size: small;
+    margin-bottom: 1rem;
+    float: left;
+    text-decoration: none;
+    color: black;
+}
+
+body > div.main > div#head > ul > li > a {
+    color: black;
+    text-decoration: none;
+}
+
+body > div.main > div#head > ul > li > a:hover {
+    color: cornflowerblue;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+body > div.main > div#head {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
 }
 
 

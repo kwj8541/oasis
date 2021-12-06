@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="userEntity" type="com.junyweb.oasis.entities.UserEntity"--%>
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -20,8 +19,8 @@
     </div>
     <div id="head">
         <ul>
-<%--            <li><a href="#">오아시스 차트</a></li>--%>
-<%--            <li><a href="#">최신 음악</a></li>--%>
+            <li><a href="#">오아시스 차트</a></li>
+            <li><a href="#">최신 음악</a></li>
             <li><a href="/oasis/buyMusicTicket">이용권 구매</a></li>
         </ul>
     </div>

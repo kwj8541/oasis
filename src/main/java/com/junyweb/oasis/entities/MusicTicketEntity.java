@@ -5,9 +5,9 @@ import java.util.Date;
 public class MusicTicketEntity {
     private int index;
     private String userEmail;
-    private Date createdAt;
+    private Date createdAt = new Date();
     private Date expiredAt;
-    private Boolean isExpired;
+    private Boolean isExpired = false;
     private String ticketName;
 
     public String getTicketName() {

@@ -12,6 +12,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/album/resources/stylesheets/albumList.css">
     <title>AlbumList</title>
+    <c:if test="${userEntity == null}">
+        <script>
+            alert('로그인후 이용해주시기 바랍니다.');
+            window.location.href="/user/login";
+        </script>
+    </c:if>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/root/header.jsp"%>
@@ -32,13 +38,6 @@
             <span style="display: flex; flex-direction: column; align-items: center;" class="artist"><a>artist : ${album.artist}</a></span>
         </div>
     </c:forEach>
-
-    <c:if test="${userEntity == null}">
-        <script>
-            alert('로그인후 이용해주시기 바랍니다.');
-            window.history.back();
-        </script>
-    </c:if>
 </div>
 </form>
 

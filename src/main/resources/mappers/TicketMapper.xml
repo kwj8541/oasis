@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.junyweb.oasis.mappers.ITicketMapper">
+
+    <insert id="insertTicket" parameterType="com.junyweb.oasis.entities.MusicTicketEntity">
+        INSERT INTO `oasis`.`music_ticket` (`user_email`, `expired_at`, `expired_flag`, `ticket_name`)
+        VALUES (#{userEmail}, #{expiredAt}, #{isExpired}, #{ticketName})
+    </insert>
+
+    <update id="updateTicket" parameterType="com.junyweb.oasis.vos.ticket.MusicTicketVo">
+        UPDATE `oasis`.`music_ticket`
+        SET `user_email` = #{userEmail},
+            `created_at` = NOW(),
+            `expired_at` = #{expiredAt},
+            `expired_flag` = #{isExpired},
+            `ticket_name` = #{ticketName}
+        WHERE `user_email` = #{userEmail}
+        LIMIT 1;
+    </update>
+
+    <update id="updateUserTicket" parameterType="com.junyweb.oasis.entities.UserEntity">
+        UPDATE `oasis`.`users`
+        SET `have_ticket` = #{haveTicket}
+        WHERE `email` = #{email};
+    </update>
+
+    <select id="selectTicketName" parameterType="com.junyweb.oasis.entities.TicketNameEntity" resultType="com.junyweb.oasis.entities.TicketNameEntity">
+        SELECT `ticket_name` AS `ticketName`
+        FROM `oasis`.`ticket`
+        LIMIT 1;
+    </select>
+
+
+</mapper>

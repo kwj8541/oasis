@@ -181,6 +181,11 @@ public class UserService {
             loginVo.setLoginResult(LoginResult.SUSPENDED);
             return;
         }
+
+        if (!loginVo.isHaveTicket()) {
+            loginVo.setHaveTicketResult(HaveTicketResult.FALSE);
+        }
+        loginVo.setHaveTicketResult(HaveTicketResult.TRUE);
         loginVo.setLoginResult(LoginResult.SUCCESS);
     }
 }

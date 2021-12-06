@@ -45,6 +45,7 @@ public class UserController {
             session.setAttribute("userEntity", loginVo.getUserEntity()); // 세션에 회원정보담고
             return "redirect:/"; // 홈으로
         }
+        model.addAttribute("haveTicket", loginVo.getHaveTicketResult()); // 스트리밍 티켓유무 확인
         model.addAttribute("loginResult", loginVo.getLoginResult()); // 모델에 로그인 결과담기
         model.addAttribute("loginVo", loginVo); // 모델에 로그인 객체 담기
         return "user/login";

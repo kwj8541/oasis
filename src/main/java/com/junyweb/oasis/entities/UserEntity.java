@@ -16,7 +16,7 @@ public class UserEntity {
     protected boolean isEmailVerified;
     protected boolean isSuspended;
     protected boolean isDeleted;
-    private boolean haveTicket;
+    protected boolean haveTicket;
 
     public boolean isHaveTicket() {
         return haveTicket;
