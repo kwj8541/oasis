@@ -73,7 +73,8 @@ registerForm['email'].addEventListener('focusout', ()=> {
     }
     registerForm['email'].setAttribute('disabled', 'disabled');
 
-    Ajax.request({  // ajax
+    Ajax.request( // ajax
+        {
         method: Ajax.METHOD_POST,
         url: '/user/check-email',
         data: {

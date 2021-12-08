@@ -25,7 +25,9 @@
         WHERE `nickname` = #{nickname};
     </select>
 
-    <select id="selectUserByEmailVerification" parameterType="com.junyweb.oasis.entities.VerificationCodeEntity" resultType="com.junyweb.oasis.entities.UserEntity"><![CDATA[
+    <select id="selectUserByEmailVerification"
+            parameterType="com.junyweb.oasis.entities.VerificationCodeEntity"
+            resultType="com.junyweb.oasis.entities.UserEntity"><![CDATA[
         SELECT `user`.`email`               AS `email`,
                `user`.`created_at`          AS `createdAt`,
                `user`.`updated_at`          AS `updatedAt`,
@@ -46,7 +48,6 @@
           AND `code`.`expired_flag` = FALSE
           AND `code`.`code` = #{code}
         LIMIT 1;
-
         ]]>
     </select>
 

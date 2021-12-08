@@ -4,13 +4,13 @@ const emailRegex = new RegExp('^(?=.{8,50}$)([0-9a-z_]{4,})@([0-9a-z][0-9a-z\\-]
 const passwordRegex = new RegExp('^([0-9a-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'",<.>/?]{8,50})$');
 
 loginForm.onsubmit = () => {    // 로그인창에서의 정규식 확인
-    if (!emailRegex.test(loginForm['email'].value())) {
+    if (!emailRegex.test(loginForm['email'].value)) {
         alert('올바른 이메일을 입력해주세요');
         loginForm['email'].focus();
         loginForm['email'].select();
         return false;
     }
-    if (!passwordRegex.test(loginForm['password'].value())) {
+    if (!passwordRegex.test(loginForm['password'].value)) {
         alert('올바른 비밀번호를 입력해주세요.');
         loginForm['password'].focus();
         loginForm['password'].select();

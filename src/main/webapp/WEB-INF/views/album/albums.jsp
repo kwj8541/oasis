@@ -80,7 +80,6 @@
             </c:forEach>
         </tr>
         </tbody>
-
         <tfoot>
         <tr>
             <td>

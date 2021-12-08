@@ -57,7 +57,9 @@ public class AlbumService {
         albumVo.setTitle(albumEntity.getTitle());
         albumVo.setArtist(albumEntity.getArtist());
 
-        CommentEntity[] comments = Arrays.stream(this.albumMapper.selectComments(albumVo)).filter(x -> !x.isDeleted()).toArray(CommentEntity[]::new); // stream 인터페이스의 filter 메서드를 활용 , boolean 타입 isDeleted 가 참(1)이아닌 거짓(0) 인 댓글만 추출
+        CommentEntity[] comments = Arrays.stream(this.albumMapper.selectComments(albumVo)).filter
+                (x -> !x.isDeleted()).toArray(CommentEntity[]::new); // stream 인터페이스의 filter 메서드를 활용,
+        // boolean 타입 isDeleted 가 참(1)이아닌 거짓(0) 인 댓글만 추출
         albumVo.setComments(comments);
     }
 

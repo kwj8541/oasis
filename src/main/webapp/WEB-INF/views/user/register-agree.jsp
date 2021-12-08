@@ -13,27 +13,27 @@
 <body>
 <main>
     <div>
-        <div>
+        <div style="display: flex; align-items: center; justify-content: center;">
             <a href="/">
                 <img style="margin-top: 3rem;" class="logo" alt="로고"
                      src="/resources/images/oasisLogo2.png">
             </a>
         </div>
     </div>
-    <div>
-        <h1 style="font-size: 3rem; margin-left: 25px; color: dimgray; margin-right: auto">약관동의</h1>
+    <div style="display: flex; justify-content: center; align-items: center; width: 100%">
+        <h1 style="font-size: 3rem; color: dimgray;">약관동의</h1>
     </div>
-    <form style="margin-left: -5rem; margin-top: -6rem;" method="post" rel="register-agree-form">
-        <section>
-            <table style="margin-left: auto; margin-right: auto;">
-                <thead>
-                <tr>
-                    <th>
-                        <h3 style="color: dimgray;">개인정보처리방침</h3>
+    <form style="display: flex; justify-content: center; align-items: center; width: 100%" method="post" rel="register-agree-form">
+        <section style="display: flex; justify-content: center; align-items: center; width: 100%">
+            <table style="display: block; justify-content: center; align-items: center;">
+                <thead style="display: block; justify-content: center; align-items: center;">
+                <tr style="display: block; justify-content: center; align-items: center;">
+                    <th style="display: block; justify-content: center; align-items: center;">
+                        <h3 style="color: dimgray; display: flex; justify-content: center; align-items: center;">개인정보처리방침</h3>
                     </th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody style="display: block; justify-content: center; align-items: center; width: 100%">
                 <tr>
                     <td>
                         <textarea style="height: 5rem; width: 29rem;" readonly>개인정보처리방침</textarea>

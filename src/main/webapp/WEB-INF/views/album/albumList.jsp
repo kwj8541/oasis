@@ -40,7 +40,6 @@
     </c:forEach>
 </div>
 </form>
-
 <div id="foot">
     <c:if test="${listVo.maxPage > 0}">
         <div>

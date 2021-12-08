@@ -52,7 +52,6 @@ public class AlbumController {
     public String albumsGet( // 앨범 GET
             @PathVariable(name = "albumPage") int albumPage,
             @PathVariable(name = "title") String title,
-            HttpServletRequest request,
             Model model) {
         AlbumVo albumVo = new AlbumVo();
         MusicVo musicVo = new MusicVo();
@@ -61,7 +60,6 @@ public class AlbumController {
         albumVo.setTitle(title);
         musicVo.setTitleName(title);
         this.albumService.albums(albumVo, musicVo);
-        request.setAttribute("albums", albumVo);
         model.addAttribute("albums", albumVo);
         model.addAttribute("music", musicVo.getMusicList());
         return "album/albums";
@@ -78,7 +76,7 @@ public class AlbumController {
         this.albumService.putComment(userEntity, commentVo); // 댓글 insert 하기위한 메서드 호출
         if (commentVo.getCommentResult() == CommentResult.SUCCESS) { // 댓글 작성 성공시 현 위치의 URL 로 리턴
             return "redirect:/oasis/albums/"+albumPage+"/"+title;
-        } else { // 댓글 작성 실패시 서비스단에서 지정해놓은 결과를 request객체를 통해 앨범jsp로 넘겨줌
+        } else { // 댓글 작성 실패시 서비스단에서 지정해놓은 결과를 request 객체를 통해 앨범 jsp 로 넘겨줌
             request.setAttribute("commentResult", commentVo.getCommentResult());
             return "album/albums";
         }

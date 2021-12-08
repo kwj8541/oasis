@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class UserService {
 
-    public static class RegExp {    // 정규식 설정
+    public static class RegExp {    // 정규식
         public static final String EMAIL = "^(?=.{8,50}$)([0-9a-z_]{4,})@([0-9a-z][0-9a-z\\-]*[0-9a-z]\\.)?([0-9a-z][0-9a-z\\-]*[0-9a-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$";
         public static final String PASSWORD = "^([0-9a-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:'\",<.>/?]{8,50})$";
         public static final String NICKNAME = "^([0-9a-zA-Z가-힣]{1,10})$";
@@ -110,12 +110,12 @@ public class UserService {
         registerVo.setVerificationCode(verificationCode);
         this.userMapper.insertVerificationCode(registerVo);
 
-        // 이메일 인증
+        // 이메일 인증 mailSender 활용
         MimeMessage mimeMessage = this.mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         helper.setTo(registerVo.getEmail()); // 회원가입한 이메일로 인증메일 전송
         helper.setSubject("OASIS 회원가입 인증 이메일"); // 인증 메일 제목
-        helper.setText(String.format("<a href=\"http://127.0.0.1/email-verify?code=%s\" target=\"_blank\">인증하기</a>", verificationCode), true); // 인증 메일 내용
+        helper.setText(String.format("<a href=\"http://127.0.0.1/user/email-verify?code=%s\" target=\"_blank\">인증하기</a>", verificationCode), true); // 인증코드 담긴 메일 내용
         this.mailSender.send(mimeMessage);
 
         registerVo.setRegisterResult(RegisterResult.SUCCESS);
@@ -147,18 +147,21 @@ public class UserService {
             return;
         }
         UserEntity userEntity = this.userMapper.selectUserByEmailVerification(emailVerificationVo);
+        // 이메일 인증 코드가 담겨있는 UserEntity
+
         if (userEntity == null) {
             emailVerificationVo.setEmailVerificationResult(EmailVerificationResult.FAILURE);
             return;
         }
-        userEntity.setEmailVerified(true);
-        this.userMapper.updateEmailVerificationCodeExpired(emailVerificationVo);
-        this.userMapper.updateUser(userEntity);
+        userEntity.setEmailVerified(true); // 회원의 이메일 인증 확인 설정
+        this.userMapper.updateEmailVerificationCodeExpired(emailVerificationVo); // 이메일 인증 코드 만료 update
+        this.userMapper.updateUser(userEntity); // 회원정보 update
         emailVerificationVo.setEmailVerificationResult(EmailVerificationResult.SUCCESS);
     }
 
     public void login(LoginVo loginVo) {    // 로그인 메서드
-        if (!UserService.checkEmail(loginVo.getEmail()) || UserService.checkPassword(loginVo.getPassword())) {
+        if (!UserService.checkEmail(loginVo.getEmail()) ||
+                UserService.checkPassword(loginVo.getPassword())) {  // 정규식 확인
             loginVo.setLoginResult(LoginResult.NORMALIZATION_FAILURE);
             return;
         }
@@ -182,7 +185,7 @@ public class UserService {
             return;
         }
 
-        if (!loginVo.isHaveTicket()) {
+        if (!loginVo.isHaveTicket()) {  // 스트리밍 이용중이 아닌 경우
             loginVo.setHaveTicketResult(HaveTicketResult.FALSE);
         }
         loginVo.setHaveTicketResult(HaveTicketResult.TRUE);

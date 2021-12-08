@@ -36,6 +36,5 @@
     </script>
 </head>
 <body>
-결과는 ${resultOfTicket.toString()} 입니다
 </body>
 </html>

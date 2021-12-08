@@ -24,7 +24,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE) // 로그인 GET
+    @RequestMapping(    // 로그인 GET
+            value = "/login",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
     public String loginGet(@SessionAttribute(value = "userEntity", required = false) UserEntity userEntity) {
         if (userEntity != null) {
             return "redirect:/";
@@ -32,7 +35,10 @@ public class UserController {
         return "user/login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE) // 로그인 POST
+    @RequestMapping(     // 로그인 POST
+            value = "/login",
+            method = RequestMethod.POST,
+            produces = MediaType.TEXT_HTML_VALUE)
     public String loginPost(@SessionAttribute(value = "userEntity", required = false) UserEntity userEntity,
                             LoginVo loginVo,
                             Model model,
@@ -57,12 +63,14 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/register-agree", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE) // 회원가입 전 약관동의 GET
+    @RequestMapping(value = "/register-agree", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    // 회원가입 전 약관동의 GET
     public String agreeGet() {
         return "user/register-agree";
     }
 
-    @RequestMapping(value = "/register-agree", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE) // 회원가입 전 약관동의 POST
+    @RequestMapping(value = "/register-agree", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
+    // 회원가입 전 약관동의 POST
     public String agreePost() {
         return "redirect:/user/register";
     }
@@ -107,8 +115,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/email-verify",
-    method = RequestMethod.GET,
-    produces = MediaType.TEXT_HTML_VALUE)
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
     public String verifyEmailGet(EmailVerificationVo emailVerificationVo, Model model) {    // 이메일 인증 GET
         this.userService.verifyEmail(emailVerificationVo);
         model.addAttribute("emailVerificationResult", emailVerificationVo.getEmailVerificationResult());

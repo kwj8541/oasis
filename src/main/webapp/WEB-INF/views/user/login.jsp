@@ -11,9 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>OASIS</title>
     <link rel="stylesheet" href="/user/resources/stylesheets/login.css">
-    <script defer src="resources/scripts/login.js"></script>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap">
+    <script defer src="/user/resources/scripts/login.js"></script>
     <script>
         <c:if test="${loginResult != null}">
         <c:choose>
@@ -33,12 +33,11 @@
         alert('${alert}');
         window.history.back();
         </c:if>
-
     </script>
 </head>
 <body>
 <main>
-    <div>
+    <div class="head">
         <div style="margin: 5rem auto;">
             <a href="/">
                 <img class="logo" alt="로고" src="/resources/images/oasisLogo2.png">
@@ -46,26 +45,28 @@
         </div>
     </div>
     <form method="post" rel="login-form">
-        <div style="margin-left: 49rem;">
-            <div>
+        <div style="width: 100%; justify-content: center; align-items: center; display: contents;">
+            <div style=" justify-content: center;
+    align-items: center;
+    display: flex;">
                 <input autofocus id="email-input" maxlength="50" name="email" placeholder="이메일"
                        type="email" value="2pat@naver.com">
             </div>
-            <div>
+            <div style="justify-content: center;
+    align-items: center;
+    display: flex;">
                 <input autofocus id="password-input" maxlength="50" name="password" placeholder="비밀번호"
                        type="password" value="dhdktltm">
             </div>
         </div>
-        <div>
-            <input style="cursor: pointer; margin-top: 1rem; margin-left: 745px" class="login" type="submit" value="로그인">
+        <div style="align-items: center; justify-content: center; display: flex; margin-top: 2rem;">
+            <input style="cursor: pointer; display: flex; align-items: center; justify-content: center; "class="login" type="submit"
+                   value="로그인">
         </div>
     </form>
-    <div style="margin-left: 48rem; margin-top: 1rem;">
-        <span>
-            <a href="/user/register-agree" style="text-decoration: none">회원가입</a>
-        </span>
-        <span style="margin-left: 3rem">
-            <a href="#" style="text-decoration: none">아이디/비밀번호 찾기</a>
+    <div style="height: 4.5rem; border-radius: 9px; display: flex; justify-content: center; align-items: center; width: 100%;">
+        <span style="justify-content: center; align-items: center; display: flex; background: antiquewhite; width: 20rem; height: 4rem; border-radius: 9px;">
+            <a href="/user/register-agree" style="text-decoration: none; color: black;">회원가입</a>
         </span>
     </div>
     <div>
