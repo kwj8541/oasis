@@ -36,7 +36,7 @@ public class TicketController {
     public String buyMusicTicketPost(@SessionAttribute(name = "userEntity") UserEntity userEntity,
                                      MusicTicketEntity musicTicketEntity,
                                      Model model){
-        musicTicketEntity.setUserEmail(userEntity.getEmail());   // 세션에 담긴 회원 이메일 담기
+        musicTicketEntity.setUserEmail(userEntity.getEmail());   // 세션에 담긴 회원 이메일 담기@
         MusicTicketVo musicTicketVo = new MusicTicketVo();
         this.ticketService.musicTicket(musicTicketEntity,musicTicketVo,userEntity);
         model.addAttribute("resultOfTicket", musicTicketVo.getMusicTicketResult());
