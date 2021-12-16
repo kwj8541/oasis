@@ -75,11 +75,11 @@ public class AlbumService {
             return;
         }
         musicEntity.setView(musicEntity.getView() + 1); // 음악 선택시 선택한 음악의 조회수 + 1
-        this.albumMapper.updateMusic(musicEntity);
+        this.albumMapper.updateMusic(musicEntity); // 조회수 update
         musicVo.setView(musicEntity.getView());
         musicVo.setMusic(musicEntity.getMusic());
-        if (!userEntity.isHaveTicket()) {
-            musicVo.setMusicResult(MusicResult.NOT_ALLOWED);
+        if (!userEntity.isHaveTicket()) { // 회원 정보에 이용권 없을시
+            musicVo.setMusicResult(MusicResult.NOT_ALLOWED); // 이용 불가 설정
             return;
         }
         musicVo.setMusicResult(MusicResult.SUCCESS);

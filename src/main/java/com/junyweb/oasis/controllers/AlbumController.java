@@ -99,14 +99,14 @@ public class AlbumController {
                                            @PathVariable(name = "title") String title,
                                            @PathVariable(name = "musicName") String musicName) throws IOException {
         MusicVo musicVo = new MusicVo();
-        musicVo.setTitleName(title);
-        musicVo.setMusicName(musicName);
+        musicVo.setTitleName(title); // 앨범 이름 넘겨받기
+        musicVo.setMusicName(musicName); // 음악 이름 넘겨받기
         this.albumService.music(userEntity,musicVo);
-        if (musicVo.getMusicResult() == MusicResult.FAILURE) {
+        if (musicVo.getMusicResult() == MusicResult.FAILURE) { // 재생 실패 시 404 error
             response.sendError(404);
             return null;
         }
-        if (musicVo.getMusicResult() == MusicResult.NOT_ALLOWED) {
+        if (musicVo.getMusicResult() == MusicResult.NOT_ALLOWED) { // 회원 이용권 없을시 이용불가
             response.sendRedirect("/oasis/verifyTicket");
             return null;
         }
